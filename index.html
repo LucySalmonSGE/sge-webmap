@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>SGE — Screening géothermie profonde</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#22364d"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+ background:#22364d;color:#fff}
+.wrap{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+ gap:26px;padding:28px;text-align:center}
+h1{font-size:22px;font-weight:700;letter-spacing:.3px}
+p{font-size:14px;opacity:.75;max-width:420px;line-height:1.5}
+.btns{display:flex;flex-direction:column;gap:12px;width:100%;max-width:320px}
+a.b{display:block;padding:16px 20px;border-radius:14px;background:#fff;color:#22364d;
+ text-decoration:none;font-weight:700;font-size:15px;box-shadow:0 3px 14px rgba(0,0,0,.25)}
+a.b span{display:block;font-weight:400;font-size:12px;opacity:.6;margin-top:3px}
+a.b:active{background:#e6ecf3}
+.note{font-size:12px;opacity:.55;max-width:420px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>SGE — Screening géothermie profonde</h1>
+  <p id="msg">Redirection en cours…</p>
+  <div class="btns">
+    <a class="b" href="mobile.html">Version mobile<span>Téléphone et tablette</span></a>
+    <a class="b" href="desktop.html">Version bureau<span>Ordinateur, panneau latéral</span></a>
+  </div>
+  <div class="note">Le premier chargement peut prendre quelques secondes : les données sont
+  intégrées au fichier et se décompressent localement.</div>
+</div>
+<script>
+(function(){
+  var ua = navigator.userAgent || "";
+  var petitEcran = window.matchMedia && window.matchMedia("(max-width: 820px)").matches;
+  var tactile = /iPhone|iPod|Android.*Mobile|Windows Phone/i.test(ua);
+  var tablette = /iPad|Android(?!.*Mobile)/i.test(ua)
+              || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  var cible = (petitEcran || tactile || tablette) ? "mobile.html" : "desktop.html";
+  // ?choix=1 dans l'URL désactive la redirection et laisse choisir
+  if (location.search.indexOf("choix") === -1) {
+    document.getElementById("msg").textContent = "Ouverture de la version "
+      + (cible === "mobile.html" ? "mobile" : "bureau") + "…";
+    location.replace(cible);
+  } else {
+    document.getElementById("msg").textContent = "Choisissez une version :";
+  }
+})();
+</script>
+</body>
+</html>
